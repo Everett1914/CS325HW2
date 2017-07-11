@@ -33,26 +33,24 @@ def stoogeSort(arr):
 #return unsorted array
 def readArray():
     with open('data.txt') as data:
-        dataArray = []
         for line in data:
+            dataArray = []
             line = line.split() # to deal with blank
             if line:            # lines (ie skip them)
                 for value in line:
                     num = int(value)
                     dataArray.append(num)
-    return dataArray
+            del dataArray[0]
+            sortedArray = stoogeSort(dataArray)
+            outPutArray(sortedArray)
 
 #write sorted array to stooge.out
 def outPutArray(array):
-    with open('stooge.out', 'w') as outPutFile:
+    with open('stooge.out', 'a') as outPutFile:
         for val in array:
             num = str(val)
             outPutFile.write(num + " ")
+        outPutFile.write("\n")
 
 #Main program
-unsortedArray = readArray()
-if unsortedArray[0] != 0:
-    del unsortedArray[0]
-    sortedArray = stoogeSort(unsortedArray)
-    print(sortedArray)
-    outPutArray(sortedArray)
+readArray()
